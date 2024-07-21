@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cryptocurrency Prediction</title>
+</head>
+<body>
+  <h1>Cryptocurrency Prediction</h1>
+  <form action="/" method="POST">  <select name="cryptocurrency">  
+	<option value="BTC">Bitcoin</option>
+      <option value="ETH">Ethereum</option>
+      <option value="XRP">Ripple</option>
+    </select>
+    <button type="submit" >analyse</button>
+  </form>
+  <p>Latest predicted price: {{ predicted_price }}</p>
+  <img src="{{ url_for('static', filename='../static/images/predictions.png') }}" alt="Predicted Price vs Actual Prices">
+  </body>
+</html>
