@@ -1,5 +1,5 @@
 
-# cryptos ETH=1027, BTC = 1, XRP = 52?
+# cryptos ETH=1027, BTC = 1, XRP = 52, SOL = 5426, ADA = 2010
 from analysis.predictor import analyze_crypto_data
 from datetime import datetime, timedelta
 coinmarket_key = '4cd46783-7c2c-4d25-96bc-b1793a2e899e'
@@ -76,7 +76,7 @@ def serve_image(filename):
   return send_from_directory('/static/images/', filename)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
 
 
 
