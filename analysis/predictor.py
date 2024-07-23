@@ -11,7 +11,10 @@ from flask import Flask, render_template, request
 import io  # Used for generating image data from plot
 from matplotlib.backends.backend_agg import FigureCanvasAgg  # For embedding plots
 import matplotlib.pyplot as plt  # Your existing plotting library
-coinmarket_key = '4cd46783-7c2c-4d25-96bc-b1793a2e899e'
+from dotenv import dotenv_values
+load_dotenv()
+
+coinmarket_key = API_KEY
 url =  'https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/historical'
 
 
@@ -119,7 +122,7 @@ def analyze_crypto_data(url, headers, parameters):
 
   predicted_price = predict_for_latest_data(test_data, model)
   plot_predictions(y_test, y_pred, predicted_price)
-  return predicted_price
+  
 
 analyze_crypto_data(url, headers, parameters)
 
