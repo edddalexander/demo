@@ -2,7 +2,10 @@
 # cryptos ETH=1027, BTC = 1, XRP = 52, SOL = 5426, ADA = 2010
 from analysis.predictor import analyze_crypto_data
 from datetime import datetime, timedelta
-coinmarket_key = '4cd46783-7c2c-4d25-96bc-b1793a2e899e'
+from dotenv import dotenv_values
+load_dotenv()
+
+coinmarket_key = API_KEY
 url =  'https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/historical'
 
 headers = {
