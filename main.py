@@ -49,16 +49,16 @@ parameters = {
 
 from flask import Flask, render_template, send_from_directory, request
 
-app = Flask(__name__)
+my_app = Flask(__name__)
 
-@app.route('/')
+@my_app.route('/')
 def show_predictions():
   predicted_price = analyze_crypto_data(url, headers, parameters)
   latest_prediction = 'predictions.png'
 
   return render_template('index.html', image_filename=latest_prediction, predicted_price = predicted_price)
 
-@app.route('/', methods=['POST'])
+@my_app.route('/', methods=['POST'])
 def crypto():
     if request.method == 'POST':
         predicted_price = request.form['cryptocurrency']
@@ -75,12 +75,12 @@ def crypto():
   return redirect(url_for('show_predictions'))'''
 
 
-@app.route('/images/<filename>')
+@my_app.route('/images/<filename>')
 def serve_image(filename):
   return send_from_directory('/static/images/', filename)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    my_app.run(host='0.0.0.0', port=5000, debug=True)
 
 
 
