@@ -9,19 +9,20 @@ from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split    
 from flask import Flask, render_template, request
 import io  # Used for generating image data from plot
+import matplotlib
+matplotlib.use('Agg')  # Required to save plots as static files
 from matplotlib.backends.backend_agg import FigureCanvasAgg  # For embedding plots
 import matplotlib.pyplot as plt  # Your existing plotting library
-from dotenv import dotenv_values
-load_dotenv()
 
-coinmarket_key = API_KEY
+
+#coinmarket_key = API_KEY
 url =  'https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/historical'
 
 
-headers = {
+'''headers = {
   'Accepts': 'application/json',
   'X-CMC_PRO_API_KEY': coinmarket_key,
-}
+}'''
 # get today's date
 today = datetime.now()
 parameters = {
@@ -115,14 +116,16 @@ def plot_predictions(y_test, y_pred, predicted_price):
   #print(f"Predicted price for new data: {predicted_price}")
 
 def analyze_crypto_data(url, headers, parameters):
+  print(headers)
   data = get_coinmarketcap(url, headers, parameters)
+  
   crypto_data = extract_crypto_data(data)
   test_data, test_data_na = process_crypto_data(crypto_data)
   y_test, y_pred, model = prepare_and_train_linear_regression(test_data_na)
 
   predicted_price = predict_for_latest_data(test_data, model)
   plot_predictions(y_test, y_pred, predicted_price)
-  
+  return predicted_price
 
-analyze_crypto_data(url, headers, parameters)
+#analyze_crypto_data(url, headers, parameters)
 
