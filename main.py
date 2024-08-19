@@ -3,6 +3,7 @@
 from analysis.predictor import analyze_crypto_data
 from datetime import datetime, timedelta
 from dotenv import load_dotenv, dotenv_values
+import numpy as np
 import os
 load_dotenv()
 
@@ -34,7 +35,7 @@ def get_parameters(key):
     'interval': 'daily',
     'count': '1',
   }
-  return parameters
+  return parameters 
 
 parameters = {
   'id': 2,
@@ -54,7 +55,7 @@ my_app = Flask(__name__)
 @my_app.route('/')
 def show_predictions():
   predicted_price = analyze_crypto_data(url, headers, parameters)
-  latest_prediction = 'predictions.png'
+  latest_prediction = 'price.png'
 
   return render_template('index.html', image_filename=latest_prediction, predicted_price = predicted_price)
 
@@ -74,13 +75,19 @@ def crypto():
   parameters['id'] = crypto_value
   return redirect(url_for('show_predictions'))'''
 
-
+# Serve static images
 @my_app.route('/images/<filename>')
-def serve_image(filename):
-  return send_from_directory('/static/images/', filename)
+def serve_image(latest_prediction):
+  return send_from_directory('/static/images/', latest_prediction)
+
 
 if __name__ == '__main__':
     my_app.run(host='0.0.0.0', port=5000, debug=True)
+       
+
+
+
+
 
 
 
