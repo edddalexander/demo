@@ -1,8 +1,9 @@
 # Use a lightweight Python base image
 FROM python:3.9-slim-buster
 
+ENTRYPOINT ["python", "my_app.py"]
 # Set the working directory
-WORKDIR /app
+WORKDIR /my_app
 
 # Copy requirements file
 COPY requirements.txt requirements.txt
